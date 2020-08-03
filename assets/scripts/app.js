@@ -9,9 +9,10 @@ let currentPlayerHealth = chosenMaxLife;
 // Establecer los valores máximos de las barras de salud
 adjustHealthBars(chosenMaxLife);
 
-// Definir la función de ataque
+// Definir la función de ataque. Llama a dealMonsterDamage y resta el valor del daño a currentMonsterHealth
 function onClick() {
     const damage = dealMonsterDamage(ATTACK_VALUE);
+    currentMonsterHealth -= damage;
 }
 
 // Añadir un listener al botón de ataque
