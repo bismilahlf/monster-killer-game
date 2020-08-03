@@ -1,5 +1,6 @@
 // Definir variables para el valor de ataque y el valor máximo de vida que más adelante será definido por el usuario
 const ATTACK_VALUE = 10;
+const MONSTER_ATTACK_VALUE = 15;
 let chosenMaxLife = 100;
 
 // Definir las variables para el valor actual de la vida del monstruo y del jugador
@@ -15,10 +16,15 @@ adjustHealthBars(chosenMaxLife);
 function onClick() {
     const damage = dealMonsterDamage(ATTACK_VALUE);
     currentMonsterHealth -= damage;
-    console.log(currentMonsterHealth);
+    
     if(currentMonsterHealth <= 0) {
-        alert("You won!!!");
+        alert("You win!!!");
+    } else if(currentPlayerHealth <= 0) {
+        alert("You loose :(");
     }
+
+    const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
+    currentPlayerHealth -= playerDamage;
 }
 
 // Añadir un listener al botón de ataque
