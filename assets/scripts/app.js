@@ -11,16 +11,18 @@ let currentPlayerHealth = chosenMaxLife;
 adjustHealthBars(chosenMaxLife);
 
 // Definir la función de ataque. Llama a dealMonsterDamage y resta el valor del daño a currentMonsterHealth
-// Crear una alerta que salte cuando el usuario haya ganado (la barra de salud del monstruo llegue a 0)
+// Crear una alerta que salte cuando el usuario haya ganado (la barra de salud del monstruo llegue a 0), otra para cuando el usuario haya perdido y otra para cuando haya un empate
 // Definir el contra-ataque del monstruo
 function onClick() {
     const damage = dealMonsterDamage(ATTACK_VALUE);
     currentMonsterHealth -= damage;
     
-    if(currentMonsterHealth <= 0) {
+    if(currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert("You win!!!");
-    } else if(currentPlayerHealth <= 0) {
+    } else if(currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
         alert("You loose :(");
+    } else if(currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
+        alert("You have a draw");
     }
 
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
