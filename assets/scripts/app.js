@@ -11,6 +11,19 @@ let currentPlayerHealth = chosenMaxLife;
 // Establecer los valores máximos de las barras de salud
 adjustHealthBars(chosenMaxLife);
 
+function endGame() {
+    const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
+    currentPlayerHealth -= playerDamage;
+
+    if(currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
+        alert("You win!!!");
+    } else if(currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
+        alert("You loose :(");
+    } else if(currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
+        alert("You have a draw");
+    }
+}
+
 // Definir la función del modo de ataque y del contra-ataque
 function attackMonster(mode) {
     let maxDamage;
@@ -22,21 +35,10 @@ function attackMonster(mode) {
     
     const damage = dealMonsterDamage(maxDamage);
     currentMonsterHealth -= damage;
-    const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
-    currentPlayerHealth -= playerDamage;
 
     endGame();
 }
 
-function endGame() {
-    if(currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
-        alert("You win!!!");
-    } else if(currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
-        alert("You loose :(");
-    } else if(currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
-        alert("You have a draw");
-    }
-}
 
 function attackHandler() {
     attackMonster(ATTACK_VALUE);
@@ -51,7 +53,16 @@ strongAttackBtn.addEventListener('click', strongAttackHandler);
 
 // Definir función para el botón de curarse
 function healPlayerHandler() {
-    increasePlayerHealth(HEAL_VALUE);
+    let healValue;
+    if(currentPlayerHealth >= chosenMaxLife - HEAL_VALUE) {
+        healValue = chosenMaxLife - currentPlayerHealth;
+        alert("You can't heal more than your maximun initial health")
+    } else if(currentPlayerHealth < chosenMaxLife - HEAL_VALUE) {
+        healValue = HEAL_VALUE;
+    }
+    increasePlayerHealth(healValue);
+    currentPlayerHealth += healValue;
+    endGame();
 }
 
 healBtn.addEventListener('click', healPlayerHandler);
