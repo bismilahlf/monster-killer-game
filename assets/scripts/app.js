@@ -2,6 +2,7 @@
 const ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
+const HEAL_VALUE = 20;
 let chosenMaxLife = 100;
 
 // Definir las variables para el valor actual de la vida del monstruo y del jugador
@@ -11,7 +12,7 @@ let currentPlayerHealth = chosenMaxLife;
 // Establecer los valores máximos de las barras de salud
 adjustHealthBars(chosenMaxLife);
 
-// Definir la funxión del modo de ataque y del contra-ataque
+// Definir la función del modo de ataque y del contra-ataque
 function attackMonster(mode) {
     let maxDamage;
     if(mode === ATTACK_VALUE) {
@@ -42,7 +43,12 @@ function strongAttackHandler() {
     attackMonster(STRONG_ATTACK_VALUE);
 }
 
-// Añadir un listener al botón de ataque
 attackBtn.addEventListener('click', attackHandler);
-// Añadir listener al botón de ataque fuerte
 strongAttackBtn.addEventListener('click', strongAttackHandler);
+
+// Definir función para el botón de curarse
+function healPlayerHandler() {
+    increasePlayerHealth(HEAL_VALUE);
+}
+
+healBtn.addEventListener('click', healPlayerHandler);
