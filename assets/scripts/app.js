@@ -1,4 +1,3 @@
-// Definir variables para los valores de ataque y el valor máximo de vida que más adelante será definido por el usuario
 const ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
@@ -7,13 +6,25 @@ const HEAL_VALUE = 20;
 let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
+let hasBonusLife = true;
 
 // Establecer los valores máximos de las barras de salud
 adjustHealthBars(chosenMaxLife);
 
-function endGame() {
+// Definir la funcionalidad del final de cada ronda y la vida extra
+function endRound() {
+    const initialPlayerHealth = currentPlayerHealth;
+    console.log(initialPlayerHealth);
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -= playerDamage;
+
+    if(currentPlayerHealth <= 0 && hasBonusLife) {
+        hasBonusLife = false;
+        removeBonusLife();
+        currentPlayerHealth = initialPlayerHealth;
+        setPlayerHealth(initialPlayerHealth);
+        alert("Bonus life!");
+    }
 
     if(currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert("You win!!!");
@@ -36,7 +47,7 @@ function attackMonster(mode) {
     const damage = dealMonsterDamage(maxDamage);
     currentMonsterHealth -= damage;
 
-    endGame();
+    endRound();
 }
 
 
@@ -66,3 +77,5 @@ function healPlayerHandler() {
 }
 
 healBtn.addEventListener('click', healPlayerHandler);
+
+// Definir 
