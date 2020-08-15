@@ -11,10 +11,16 @@ let hasBonusLife = true;
 // Establecer los valores máximos de las barras de salud
 adjustHealthBars(chosenMaxLife);
 
+// Definir funcionalidad de reseteo del juego
+function reset() {
+    currentPlayerHealth = chosenMaxLife;
+    currentMonsterHealth = chosenMaxLife;
+    resetGame(chosenMaxLife);
+}
+
 // Definir la funcionalidad del final de cada ronda y la vida extra
 function endRound() {
     const initialPlayerHealth = currentPlayerHealth;
-    console.log(initialPlayerHealth);
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -= playerDamage;
 
@@ -33,6 +39,10 @@ function endRound() {
     } else if(currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
         alert("You have a draw");
     }
+
+    if(currentPlayerHealth <= 0 || currentMonsterHealth <= 0) {
+        reset();
+    }
 }
 
 // Definir la función del modo de ataque y del contra-ataque
@@ -49,7 +59,6 @@ function attackMonster(mode) {
 
     endRound();
 }
-
 
 function attackHandler() {
     attackMonster(ATTACK_VALUE);
@@ -73,7 +82,7 @@ function healPlayerHandler() {
     }
     increasePlayerHealth(healValue);
     currentPlayerHealth += healValue;
-    endGame();
+    endRound();
 }
 
 healBtn.addEventListener('click', healPlayerHandler);

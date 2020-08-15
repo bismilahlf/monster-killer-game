@@ -14,7 +14,6 @@ function adjustHealthBars(maxLife) {
   playerHealthBar.value = maxLife;
 }
 
-// Genera un número al azar basado en el valor de ataque que hayamos establecido, lo resta del valor de la barra de salud y devuelve el valor de ataque para poder usarlo en attackHandler
 function dealMonsterDamage(damage) {
   const dealtDamage = Math.random() * damage;
   monsterHealthBar.value = +monsterHealthBar.value - dealtDamage;
