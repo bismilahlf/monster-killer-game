@@ -2,8 +2,14 @@ const ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
 const HEAL_VALUE = 20;
+const USER_CHOSEN_VALUE = prompt("Enter a maximun life value for you and the monster", "100");
 
-let chosenMaxLife = 100;
+let chosenMaxLife = +USER_CHOSEN_VALUE;
+
+if(isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+    chosenMaxLife = 100;
+}
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let hasBonusLife = true;
