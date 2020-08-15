@@ -2,11 +2,11 @@ const ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
 const HEAL_VALUE = 20;
-const USER_CHOSEN_HEALTH = prompt("Enter a maximun life value for you and the monster", "100");
 const ATTACK_MODE = "attack";
 const STRONG_ATTACK_MODE = "strong attack"
 
-let chosenMaxLife = +USER_CHOSEN_HEALTH;
+const userChosenHealth = prompt("Enter a maximun life value for you and the monster", "100");
+let chosenMaxLife = +userChosenHealth;
 
 if(isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
     chosenMaxLife = 100;
@@ -26,7 +26,7 @@ function reset() {
     resetGame(chosenMaxLife);
 }
 
-// Definir la funcionalidad del final de cada ronda y la vida extra
+// Definir la funcionalidad para la salud del jugador, el final de cada ronda y la vida extra
 function endRound() {
     const initialPlayerHealth = currentPlayerHealth;
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
@@ -53,7 +53,7 @@ function endRound() {
     }
 }
 
-// Definir la función del modo de ataque y del contra-ataque
+// Definir la funcionalidad para el modo de ataque y la salud del monstruo
 function attackMonster(mode) {
     let maxDamage;
     if(mode === ATTACK_MODE) {
@@ -76,9 +76,6 @@ function strongAttackHandler() {
     attackMonster(STRONG_ATTACK_MODE);
 }
 
-attackBtn.addEventListener('click', attackHandler);
-strongAttackBtn.addEventListener('click', strongAttackHandler);
-
 // Definir función para el botón de curarse
 function healPlayerHandler() {
     let healValue;
@@ -93,6 +90,6 @@ function healPlayerHandler() {
     endRound();
 }
 
+attackBtn.addEventListener('click', attackHandler);
+strongAttackBtn.addEventListener('click', strongAttackHandler);
 healBtn.addEventListener('click', healPlayerHandler);
-
-// Definir 
