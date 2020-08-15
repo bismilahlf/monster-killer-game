@@ -2,9 +2,11 @@ const ATTACK_VALUE = 10;
 const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
 const HEAL_VALUE = 20;
-const USER_CHOSEN_VALUE = prompt("Enter a maximun life value for you and the monster", "100");
+const USER_CHOSEN_HEALTH = prompt("Enter a maximun life value for you and the monster", "100");
+const ATTACK_MODE = "attack";
+const STRONG_ATTACK_MODE = "strong attack"
 
-let chosenMaxLife = +USER_CHOSEN_VALUE;
+let chosenMaxLife = +USER_CHOSEN_HEALTH;
 
 if(isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
     chosenMaxLife = 100;
@@ -54,9 +56,9 @@ function endRound() {
 // Definir la función del modo de ataque y del contra-ataque
 function attackMonster(mode) {
     let maxDamage;
-    if(mode === ATTACK_VALUE) {
+    if(mode === ATTACK_MODE) {
         maxDamage = ATTACK_VALUE;
-    } else if(mode === STRONG_ATTACK_VALUE) {
+    } else if(mode === STRONG_ATTACK_MODE) {
         maxDamage = STRONG_ATTACK_VALUE;
     }
     
@@ -67,11 +69,11 @@ function attackMonster(mode) {
 }
 
 function attackHandler() {
-    attackMonster(ATTACK_VALUE);
+    attackMonster(ATTACK_MODE);
 }
 
 function strongAttackHandler() {
-    attackMonster(STRONG_ATTACK_VALUE);
+    attackMonster(STRONG_ATTACK_MODE);
 }
 
 attackBtn.addEventListener('click', attackHandler);
